@@ -1,0 +1,110 @@
+// clearfix
+@mixin clearfix {
+    &:after {
+        clear: both;
+        content: '.';
+        display: block;
+        height: 0;
+        line-height: 0;
+        overflow: hidden;
+    }
+    *height: 1%;
+}
+
+// minheight
+@mixin minHeight($min-height) {
+    min-height: $min-height;
+    height: auto !important;
+    height: $min-height;
+}
+
+// width and height
+@mixin divBulk($width:100%, $height:auto) {
+    width: $width;
+    height: $height;
+}
+
+// inline-block
+// ie6-7 *display: inline;*zoom:1;
+@mixin inline-block {
+    display: inline-block;
+    @if $lte7 {
+        *display: inline;
+        *zoom: 1;
+    }
+}
+
+// ie6-7 8 line-height;
+@mixin line-height($line-height) {
+    line-height: $line-height;
+    line-height: $line-height+'\9';
+    @if $lte7 {
+        *line-height: $line-height;
+        _line-height: $line-height;
+    }
+}
+
+//float
+@mixin float($float:left) {
+    float: $float;
+    @if $lte7 {
+        display: inline;
+    }
+}
+
+// position
+@mixin position($top:auto, $right:auto, $bottom:auto, $left:auto) {
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+//triangle
+@mixin arrow($direction, $size, $color) {
+    width: 0;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    overflow: hidden;
+    border-width: $size;
+    cursor: pointer;
+    @if $direction==top {
+        border-style: dashed dashed solid dashed;
+        border-color: transparent transparent $color transparent;
+        border-top: none;
+    }
+    @else if $direction==bottom {
+        border-style: solid dashed dashed dashed;
+        border-color: $color transparent transparent transparent;
+        border-bottom: none;
+    }
+    @else if $direction==right {
+        border-style: dashed dashed dashed solid;
+        border-color: transparent transparent transparent $color;
+        border-right: none;
+    }
+    @else if $direction==left {
+        border-style: dashed solid dashed dashed;
+        border-color: transparent $color transparent transparent;
+        border-left: none;
+    }
+}
+
+//border
+@mixin border($top:none, $right:none, $bottom:none, $left:none) {
+    border-top: $top;
+    border-right: $right;
+    border-left: $left;
+    border-bottom: $bottom;
+}
+
+//hidden
+@mixin hidden{
+  display: none;
+}
+// center
+@mixin center{
+  text-align: center;
+}
+

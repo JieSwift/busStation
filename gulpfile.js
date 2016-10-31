@@ -22,15 +22,22 @@ gulp.task('styles', function() {
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
         .pipe(minifycss())
         .pipe(rename({suffix: '.min'}))
-        .pipe(rev())
         .pipe(gulp.dest(config.sass.dest))
-        .pipe(rev.manifest())
-        .pipe(gulp.dest(config.sass.rev))
         .pipe(notify({message:'Styles task is complete'}));
 });
 
 //rev
-gulp.task('rev', function () {
+gulp.task('revChange',function(){
+    return gulp.src(config.build.src)
+    .pipe(rev())
+    .pipe(gulp.dest(config.build.dest))
+    .pipe(rev.manifest())
+    .pipe(gulp.dest(config.sass.rev))
+    .pipe(notify({message:'changeRev task is complete'}));
+});
+
+//revCollector
+gulp.task('revCollector', function () {
     return gulp.src([config.rev.revJson, 'index.html'])
         .pipe( revCollector({
             replaceReved: true,
@@ -48,7 +55,7 @@ gulp.task('clean', function() {
 // 监听
 gulp.task('watch', function() {
     // 监听所有.scss档
-    gulp.watch(config.sass.all, ['styles']);
+    gulp.watch(config.sass.all, ['clean','styles']);
 
     // 建立即时重整伺服器
     var server = livereload();
@@ -58,4 +65,5 @@ gulp.task('watch', function() {
         server.changed(file.path);
     });
 });
-gulp.task('default',gulpsync.sync(['clean',['styles'],'rev','watch']));
+gulp.task('default',gulpsync.sync(['clean',['styles'],'watch']));
+gulp.task('rev',gulpsync.sync(['revChange','revCollector']));

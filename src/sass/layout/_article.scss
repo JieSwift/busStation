@@ -1,0 +1,82 @@
+.article-content {
+    ul {
+        @include clearfix;
+        border-bottom: 2px solid $green;
+        li {
+            float: left;
+            margin-right: 5px;
+            h2{
+              margin-left: 5px;
+            }
+            h2,
+            .font {
+                color: $green;
+            }
+            h2,
+            h4,
+            p {
+                @include inline-block;
+            }
+            .font {
+                margin-left: 5px;
+            }
+            h4 {
+                color: $red;
+                margin: 0 4px;
+            }
+        }
+    }
+}
+
+.middle {
+    @include divBulk(auto, 60px);
+    .middle-hint,
+    p {
+        @include inline-block;
+    }
+    p {
+        color: $green;
+        @include line-height(50px);
+        margin-left: 10px;
+        position: relative;
+        top: -7px;
+    }
+    .middle-hint {
+        width: 20px;
+        height: 60px;
+        @include center;
+        background: $green;
+        color: #fff;
+        span {
+            display: block;
+        }
+    }
+}
+
+.right {
+    margin-left: 10px;
+    span,
+    p {
+        line-height: 30px;
+    }
+}
+.line{
+  width: 70px;
+  background: $red;
+  margin-top: 10px;
+  border-bottom: 2px solid $red;
+  @include inline-block;
+}
+.arrow{
+  @include arrow(top,7px,$red);
+  @include inline-block;
+  position: relative;
+  right: 17px;
+}
+.station-wr li {
+    @include divBulk(20px, auto);
+    padding: 2px;
+    line-height: 18px;
+    word-wrap: break-word;
+    overflow: hidden;
+}
